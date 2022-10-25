@@ -1,4 +1,5 @@
 import random
+from socketserver import BaseRequestHandler
 
 class BankAccount:
     def __init__(self, full_name,):
@@ -24,23 +25,33 @@ class BankAccount:
             interest = self.balance * 0.00083
             self.balance = self.balance + interest
             self.balance = round(self.balance, 2)
+        else:
+            print('You can not earn interest on overdraft balances')
     def print_statement(self):
-        hide_account = self.balance
-        #print(hide_account) - works
-        hide_account = str(hide_account)
-        #print(hide_account) - works
+        hide_account = str(self.account)
         hide_account = (hide_account[4:8])
-        print(hide_account)
-        print(f"{self.name}\nAccount No.: {self.account}\nBalance: ${self.balance}")
+        hide_account = f"****{hide_account}"
+        print('--------------------')
+        print(f"{self.name}\nAccount No.: {hide_account}\nBalance: ${self.balance}")
+        print('--------------------')
         
         
         
 
 mitchell_account = BankAccount('Mitchell Hudson')
+mitchell_account.deposit(400000)
+mitchell_account.print_statement()
+mitchell_account.add_interest()
+mitchell_account.print_statement()
+mitchell_account.withdraw(150)
 mitchell_account.print_statement()
 dani_account = BankAccount('Dani Roxberry')
+dani_account.deposit(5000)
+dani_account.withdraw(1500)
+dani_account.print_statement()
 braus_account = BankAccount('Adam Braus')
-bank_account = 84582949
-bank_account = str(bank_account)
-hides_account = (bank_account[4:8])
-print(hides_account)
+braus_account.deposit(50)
+braus_account.withdraw(50)
+braus_account.withdraw(10)
+braus_account.add_interest()
+braus_account.print_statement()
