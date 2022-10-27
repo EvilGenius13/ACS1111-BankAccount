@@ -23,7 +23,7 @@ class BankAccount:
         return self.balance
     
     def add_interest(self):
-        if self.balance >0:
+        if self.balance >=0:
             interest = self.balance * 0.00083
             self.balance = self.balance + interest
             self.balance = round(self.balance, 2)
@@ -41,7 +41,7 @@ class BankAccount:
 def banking_loop():
     bank_loop = True
     while bank_loop:
-        user_account_response = input('What would you like to do?: D for Deposit, W for Withdrawal, S for Statement, Q to Quit. ')
+        user_account_response = input('What would you like to do?: D for Deposit, W for Withdrawal, I for Interest, S for Statement, Q to Quit. ')
         if user_account_response.upper() == 'D':
             deposit_amount = input('How much would you like to deposit?: ')
             deposit_amount = int(deposit_amount)
@@ -54,6 +54,9 @@ def banking_loop():
             continue
         elif user_account_response.upper() == 'S':
             new_account.print_statement()
+            continue
+        elif user_account_response.upper() == 'I':
+            new_account.add_interest()
             continue
         elif user_account_response.upper == 'Q':
             bank_loop = False
@@ -69,7 +72,7 @@ while app_loop:
         print("Fantastic. Let's get some information from you.")
         user_name = input("Please enter your full name: ")
         new_account = BankAccount(user_name)
-        print("Here are your account details.\nPlease memorize your account number as it will be hidden on future receipts")
+        print("\nHere are your account details.\nPlease memorize your account number as it will be hidden on future receipts")
         print(f"Name: {new_account.name}\nAccount Number: {new_account.account}\nBalance: {new_account.balance}")
         banking_loop()
         app_loop = False
@@ -80,20 +83,3 @@ while app_loop:
         print("Please enter a valid response (Y/N)")
 
 
-# mitchell_account = BankAccount('Mitchell Hudson')
-# mitchell_account.deposit(400000)
-# mitchell_account.print_statement()
-# mitchell_account.add_interest()
-# mitchell_account.print_statement()
-# mitchell_account.withdraw(150)
-# mitchell_account.print_statement()
-# dani_account = BankAccount('Dani Roxberry')
-# dani_account.deposit(5000)
-# dani_account.withdraw(1500)
-# dani_account.print_statement()
-# braus_account = BankAccount('Adam Braus')
-# braus_account.deposit(50)
-# braus_account.withdraw(50)
-# braus_account.withdraw(10)
-# braus_account.add_interest()
-# braus_account.print_statement()
